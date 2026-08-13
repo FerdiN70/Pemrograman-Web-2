@@ -1,0 +1,6 @@
+# Jangan unggah file sensitif dan file sampah
+.env
+node_modules/
+dist/
+build/
+.DS_Store
