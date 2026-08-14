@@ -19,19 +19,19 @@ UNSIA Digital Library adalah sebuah aplikasi sistem manajemen perpustakaan yang 
 
 
 ### Dashboard Overview
-<img width="1127" height="598" alt="image" src="https://github.com/user-attachments/assets/bf493786-39c9-442c-9420-60bbc1d223b0" />
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/bf493786-39c9-442c-9420-60bbc1d223b0" />
 
 
 ### Data Buku
-<img width="1120" height="911" alt="image" src="https://github.com/user-attachments/assets/95113ab5-1f52-44f8-b7c3-16721c98b0a8" />
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/95113ab5-1f52-44f8-b7c3-16721c98b0a8" />
 
 
 ### Data Anggota
-<img width="1124" height="906" alt="image" src="https://github.com/user-attachments/assets/075cf951-4165-46d0-bc8c-280ef4e78c7e" />
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/075cf951-4165-46d0-bc8c-280ef4e78c7e" />
 
 
 ### Transaksi Peminjaman
-<img width="1120" height="909" alt="image" src="https://github.com/user-attachments/assets/9cf32cf4-77f2-43b9-8dda-25603ac65d14" />
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/9cf32cf4-77f2-43b9-8dda-25603ac65d14" />
 
 
 ## Cara Mengakses Aplikasi
