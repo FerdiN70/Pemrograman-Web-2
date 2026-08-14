@@ -33,9 +33,18 @@ Jika Anda ingin menjalankan aplikasi ini di komputer lokal, ikuti langkah beriku
    ```bash
    git clone [URL_REPOSITORI_ANDA]
    
-**Install dependensi (Backend & Frontend):**
+2. **Install dependensi (Backend & Frontend):**
 Masuk ke folder backend dan frontend, lalu jalankan:
 npm install
-**Konfigurasi Environment:**
+3. **Konfigurasi Environment:**
 Pastikan file .env sudah diatur sesuai dengan koneksi database MongoDB Anda.
 npm run dev
+
+
+
+
+
+
+
+
+
