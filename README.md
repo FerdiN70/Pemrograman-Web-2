@@ -41,8 +41,8 @@ Masuk ke folder backend dan frontend, lalu jalankan:
 Pastikan file .env sudah diatur sesuai dengan koneksi database MongoDB Anda.
    ```bash
    npm run dev
-
-
+Dibuat oleh Ferdian - Mahasiswa Universitas Siber Asia (UNSIA) untuk tugas UAS Web Programming II.
+   
 
 
 
