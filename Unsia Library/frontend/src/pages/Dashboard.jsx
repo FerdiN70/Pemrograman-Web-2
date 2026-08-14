@@ -9,6 +9,7 @@ export default function Dashboard() {
     const [members, setMembers] = useState([]);
     const [loans, setLoans] = useState([]);
     const [summary, setSummary] = useState({ totalBooks: 0, totalMembers: 0, totalLoans: 0, activeLoans: 0 });
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
     const username = localStorage.getItem('username') || 'Ferdi';
     
@@ -199,27 +200,32 @@ export default function Dashboard() {
     };
 
     return (
-        <div style={{ display: 'flex', height: '100vh', background: '#f4f6f9', fontFamily: 'Arial, sans-serif', overflow: 'hidden' }}>
+        <div className="app-container">
             
+            {/* OVERLAY MOBILE MENU */}
+            {mobileMenuOpen && (
+                <div className="sidebar-overlay" onClick={() => setMobileMenuOpen(false)}></div>
+            )}
+
             {/* SIDEBAR KIRI */}
-            <div className="no-print" style={{ width: '260px', background: '#0b3c5d', color: 'white', display: 'flex', flexDirection: 'column', padding: '20px 0', boxSizing: 'border-box', flexShrink: 0 }}>
-                <div style={{ padding: '0 20px 20px 20px', borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div style={{ background: 'white', color: '#0b3c5d', padding: '6px 10px', borderRadius: '4px', fontWeight: 'bold', fontSize: '12px' }}>UNSIA</div>
-                    <span style={{ fontWeight: 'bold', fontSize: '16px', letterSpacing: '0.5px' }}>Digital Library</span>
+            <div className={`no-print sidebar ${mobileMenuOpen ? 'open' : ''}`}>
+                <div className="sidebar-header">
+                    <div className="sidebar-logo">UNSIA</div>
+                    <span className="sidebar-title">Digital Library</span>
                 </div>
 
-                <div style={{ padding: '20px', textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                    <div style={{ width: '50px', height: '50px', background: '#cbd5e1', borderRadius: '50%', margin: '0 auto 10px auto', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', color: '#333' }}>👤</div>
+                <div className="sidebar-user">
+                    <div className="sidebar-avatar">👤</div>
                     <div style={{ fontWeight: 'bold', fontSize: '14px' }}>{username}</div>
                     <div style={{ fontSize: '11px', color: '#93c5fd' }}>admin@unsia.ac.id</div>
                 </div>
 
-                <div style={{ flex: 1, padding: '15px 10px', display: 'flex', flexDirection: 'column', gap: '5px', overflowY: 'auto' }}>
+                <div className="sidebar-menu">
                     <div style={{ fontSize: '11px', color: '#93c5fd', padding: '5px 10px', textTransform: 'uppercase', fontWeight: 'bold' }}>Menu Utama</div>
-                    <button onClick={() => setActiveTab('overview')} style={{ textAlign: 'left', background: activeTab === 'overview' ? '#1d4ed8' : 'transparent', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}>📊 Dashboard</button>
-                    <button onClick={() => setActiveTab('books')} style={{ textAlign: 'left', background: activeTab === 'books' ? '#1d4ed8' : 'transparent', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}>📖 Data Buku</button>
-                    <button onClick={() => setActiveTab('members')} style={{ textAlign: 'left', background: activeTab === 'members' ? '#1d4ed8' : 'transparent', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}>👥 Data Anggota</button>
-                    <button onClick={() => setActiveTab('loans')} style={{ textAlign: 'left', background: activeTab === 'loans' ? '#1d4ed8' : 'transparent', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}>🔄 Transaksi Peminjaman</button>
+                    <button onClick={() => { setActiveTab('overview'); setMobileMenuOpen(false); }} className={`menu-btn ${activeTab === 'overview' ? 'active' : ''}`}>📊 Dashboard</button>
+                    <button onClick={() => { setActiveTab('books'); setMobileMenuOpen(false); }} className={`menu-btn ${activeTab === 'books' ? 'active' : ''}`}>📖 Data Buku</button>
+                    <button onClick={() => { setActiveTab('members'); setMobileMenuOpen(false); }} className={`menu-btn ${activeTab === 'members' ? 'active' : ''}`}>👥 Data Anggota</button>
+                    <button onClick={() => { setActiveTab('loans'); setMobileMenuOpen(false); }} className={`menu-btn ${activeTab === 'loans' ? 'active' : ''}`}>🔄 Transaksi Peminjaman</button>
                 </div>
 
                 <div style={{ padding: '15px 20px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
@@ -228,15 +234,20 @@ export default function Dashboard() {
             </div>
 
             {/* KONTEN UTAMA KANAN */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+            <div className="main-content-wrapper">
                 
                 {/* TOP NAVBAR */}
-                <div className="no-print" style={{ height: '60px', background: 'white', borderBottom: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 30px', boxSizing: 'border-box' }}>
-                    <div style={{ fontWeight: 'bold', color: '#374151', fontSize: '16px' }}>
-                        {activeTab === 'overview' && 'Dashboard Overview'}
-                        {activeTab === 'books' && 'Data Buku Perpustakaan'}
-                        {activeTab === 'members' && 'Data Anggota Perpustakaan'}
-                        {activeTab === 'loans' && 'Data Transaksi Peminjaman'}
+                <div className="no-print top-navbar">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                        <button className="hamburger-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                            ☰
+                        </button>
+                        <div style={{ fontWeight: 'bold', color: '#374151', fontSize: '16px' }}>
+                            {activeTab === 'overview' && 'Dashboard Overview'}
+                            {activeTab === 'books' && 'Data Buku Perpustakaan'}
+                            {activeTab === 'members' && 'Data Anggota Perpustakaan'}
+                            {activeTab === 'loans' && 'Data Transaksi Peminjaman'}
+                        </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                         <span style={{ fontSize: '14px', color: '#4b5563', fontWeight: '500' }}>Halo, {username}</span>
@@ -244,51 +255,51 @@ export default function Dashboard() {
                 </div>
 
                 {/* ISI HALAMAN (SCROLLABLE) */}
-                <div style={{ flex: 1, overflowY: 'auto', padding: '25px', boxSizing: 'border-box' }}>
+                <div className="content-scrollable">
                     
                     {/* TAB OVERVIEW */}
                     {activeTab === 'overview' && (
                         <div>
-                            <div style={{ background: 'white', padding: '20px 25px', borderRadius: '8px', marginBottom: '25px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div className="overview-header-card">
                                 <div>
-                                    <h2 style={{ margin: '0 0 5px 0', color: '#1f2937', fontSize: '20px' }}>Laporan Ringkasan Sistem - UNSIA Digital Library</h2>
-                                    <p style={{ margin: 0, color: '#6b7280', fontSize: '13px' }}>Data diambil secara real-time dari endpoint /api/dashboard/summary.</p>
+                                    <h2 style={{ margin: '0 0 5px 0', color: '#1f2937', fontSize: '18px' }}>Laporan Ringkasan Sistem - UNSIA Digital Library</h2>
+                                    <p style={{ margin: 0, color: '#6b7280', fontSize: '12px' }}>Data diambil secara real-time dari endpoint /api/dashboard/summary.</p>
                                 </div>
                                 <button 
                                     className="no-print"
                                     onClick={handleDownloadPDF} 
-                                    style={{ padding: '10px 18px', background: '#0b3c5d', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-                                    📥 Unduh Ringkasan PDF
+                                    style={{ padding: '8px 14px', background: '#0b3c5d', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+                                    📥 Unduh PDF
                                 </button>
                             </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px', marginBottom: '25px' }}>
-                                <div style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', borderLeft: '4px solid #0b3c5d' }}>
+                            <div className="stats-grid">
+                                <div className="stat-card" style={{ borderLeft: '4px solid #0b3c5d' }}>
                                     <div style={{ color: '#6b7280', fontSize: '12px', marginBottom: '5px' }}>Total Buku</div>
-                                    <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#1f2937' }}>{summary.totalBooks}</div>
+                                    <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#1f2937' }}>{summary.totalBooks}</div>
                                 </div>
-                                <div style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', borderLeft: '4px solid #10b981' }}>
+                                <div className="stat-card" style={{ borderLeft: '4px solid #10b981' }}>
                                     <div style={{ color: '#6b7280', fontSize: '12px', marginBottom: '5px' }}>Total Anggota</div>
-                                    <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#1f2937' }}>{summary.totalMembers}</div>
+                                    <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#1f2937' }}>{summary.totalMembers}</div>
                                 </div>
-                                <div style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', borderLeft: '4px solid #f59e0b' }}>
+                                <div className="stat-card" style={{ borderLeft: '4px solid #f59e0b' }}>
                                     <div style={{ color: '#6b7280', fontSize: '12px', marginBottom: '5px' }}>Total Peminjaman</div>
-                                    <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#1f2937' }}>{summary.totalLoans}</div>
+                                    <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#1f2937' }}>{summary.totalLoans}</div>
                                 </div>
-                                <div style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', borderLeft: '4px solid #ef4444' }}>
+                                <div className="stat-card" style={{ borderLeft: '4px solid #ef4444' }}>
                                     <div style={{ color: '#6b7280', fontSize: '12px', marginBottom: '5px' }}>Sedang Dipinjam</div>
-                                    <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#1f2937' }}>{summary.activeLoans}</div>
+                                    <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#1f2937' }}>{summary.activeLoans}</div>
                                 </div>
                             </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                                <div style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+                            <div className="charts-grid">
+                                <div className="chart-container-box">
                                     <h4 style={{ margin: '0 0 15px 0', color: '#374151' }}>Grafik Statistik Ringkasan</h4>
                                     <div style={{ height: '220px', position: 'relative' }}>
                                         <canvas ref={chartRef1}></canvas>
                                     </div>
                                 </div>
-                                <div style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+                                <div className="chart-container-box">
                                     <h4 style={{ margin: '0 0 15px 0', color: '#374151' }}>Tren Transaksi Bulanan</h4>
                                     <div style={{ height: '220px', position: 'relative' }}>
                                         <canvas ref={chartRef2}></canvas>
@@ -300,185 +311,429 @@ export default function Dashboard() {
 
                     {/* TAB KELOLA BUKU */}
                     {activeTab === 'books' && (
-                        <div style={{ background: 'white', padding: '25px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+                        <div className="table-card">
                             <h3 style={{ marginTop: 0, marginBottom: '20px', color: '#1f2937' }}>{editBookId ? 'Edit Data Buku' : 'Daftar Buku Perpustakaan'}</h3>
-                            <form onSubmit={handleSaveBook} style={{ background: '#f8fafc', padding: '20px', borderRadius: '8px', border: '1px solid #e2e8f0', display: 'grid', gridTemplateColumns: '2fr 2fr 1fr 1fr auto', gap: '15px', alignItems: 'end', marginBottom: '25px', boxSizing: 'border-box' }}>
+                            <form onSubmit={handleSaveBook} className="form-grid-dynamic">
                                 <div>
-                                    <label style={{ fontSize: '12px', color: '#4b5563', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Judul Buku</label>
-                                    <input type="text" placeholder="Masukkan judul..." value={title} onChange={(e) => setTitle(e.target.value)} style={{ width: '100%', padding: '8px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', boxSizing: 'border-box', outline: 'none', background: 'white' }} />
+                                    <label className="form-label">Judul Buku</label>
+                                    <input type="text" placeholder="Masukkan judul..." value={title} onChange={(e) => setTitle(e.target.value)} className="form-input" />
                                 </div>
                                 <div>
-                                    <label style={{ fontSize: '12px', color: '#4b5563', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Penulis</label>
-                                    <input type="text" placeholder="Masukkan penulis..." value={author} onChange={(e) => setAuthor(e.target.value)} style={{ width: '100%', padding: '8px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', boxSizing: 'border-box', outline: 'none', background: 'white' }} />
+                                    <label className="form-label">Penulis</label>
+                                    <input type="text" placeholder="Masukkan penulis..." value={author} onChange={(e) => setAuthor(e.target.value)} className="form-input" />
                                 </div>
                                 <div>
-                                    <label style={{ fontSize: '12px', color: '#4b5563', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Tahun</label>
-                                    <input type="number" placeholder="Tahun" value={publishedYear} onChange={(e) => setPublishedYear(e.target.value)} style={{ width: '100%', padding: '8px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', boxSizing: 'border-box', outline: 'none', background: 'white' }} />
+                                    <label className="form-label">Tahun</label>
+                                    <input type="number" placeholder="Tahun" value={publishedYear} onChange={(e) => setPublishedYear(e.target.value)} className="form-input" />
                                 </div>
                                 <div>
-                                    <label style={{ fontSize: '12px', color: '#4b5563', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Genre</label>
-                                    <input type="text" placeholder="Genre" value={genre} onChange={(e) => setGenre(e.target.value)} style={{ width: '100%', padding: '8px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', boxSizing: 'border-box', outline: 'none', background: 'white' }} />
+                                    <label className="form-label">Genre</label>
+                                    <input type="text" placeholder="Genre" value={genre} onChange={(e) => setGenre(e.target.value)} className="form-input" />
                                 </div>
-                                <button type="submit" style={{ padding: '9px 20px', background: '#0b3c5d', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', height: '37px' }}>
+                                <button type="submit" className="form-submit-btn">
                                     {editBookId ? 'Update' : '+ Tambah'}
                                 </button>
                             </form>
 
-                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', tableLayout: 'fixed' }}>
-                                <thead>
-                                    <tr style={{ background: '#0b3c5d', color: 'white', textAlign: 'left' }}>
-                                        <th style={{ padding: '14px 15px', width: '6%', verticalAlign: 'middle' }}>#</th>
-                                        <th style={{ padding: '14px 15px', width: '34%', verticalAlign: 'middle' }}>JUDUL BUKU</th>
-                                        <th style={{ padding: '14px 15px', width: '25%', verticalAlign: 'middle' }}>PENULIS</th>
-                                        <th style={{ padding: '14px 15px', width: '10%', verticalAlign: 'middle' }}>TAHUN</th>
-                                        <th style={{ padding: '14px 15px', width: '15%', verticalAlign: 'middle' }}>GENRE</th>
-                                        <th style={{ padding: '14px 15px', width: '10%', textAlign: 'center', verticalAlign: 'middle' }}>AKSI</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {books.length === 0 ? (
-                                        <tr><td colSpan="6" style={{ textAlign: 'center', padding: '25px', color: '#6b7280' }}>Belum ada data buku.</td></tr>
-                                    ) : (
-                                        books.map((b, index) => (
-                                            <tr key={b._id} style={{ borderBottom: '1px solid #e5e7eb', background: index % 2 === 0 ? '#ffffff' : '#f8fafc' }}>
-                                                <td style={{ padding: '14px 15px', color: '#6b7280', verticalAlign: 'middle' }}>{index + 1}</td>
-                                                <td style={{ padding: '14px 15px', fontWeight: '600', color: '#1f2937', verticalAlign: 'middle', wordBreak: 'break-word' }}>{b.title}</td>
-                                                <td style={{ padding: '14px 15px', color: '#4b5563', verticalAlign: 'middle', wordBreak: 'break-word' }}>{b.author}</td>
-                                                <td style={{ padding: '14px 15px', color: '#4b5563', verticalAlign: 'middle' }}>{b.publishedYear}</td>
-                                                <td style={{ padding: '14px 15px', color: '#4b5563', verticalAlign: 'middle', wordBreak: 'break-word' }}>{b.genre}</td>
-                                                <td style={{ padding: '14px 15px', textAlign: 'center', verticalAlign: 'middle' }}>
-                                                    <span onClick={() => handleEditBook(b)} style={{ color: '#2563eb', cursor: 'pointer', fontWeight: '600', marginRight: '8px' }}>Edit</span>
-                                                    <span style={{ color: '#cbd5e1' }}>|</span>
-                                                    <span onClick={() => handleDeleteBook(b._id)} style={{ color: '#dc2626', cursor: 'pointer', fontWeight: '600', marginLeft: '8px' }}>Hapus</span>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    )}
-                                </tbody>
-                            </table>
+                            <div className="table-responsive">
+                                <table className="custom-table">
+                                    <thead>
+                                        <tr style={{ background: '#0b3c5d', color: 'white', textAlign: 'left' }}>
+                                            <th style={{ padding: '12px 15px' }}>#</th>
+                                            <th style={{ padding: '12px 15px' }}>JUDUL BUKU</th>
+                                            <th style={{ padding: '12px 15px' }}>PENULIS</th>
+                                            <th style={{ padding: '12px 15px' }}>TAHUN</th>
+                                            <th style={{ padding: '12px 15px' }}>GENRE</th>
+                                            <th style={{ padding: '12px 15px', textAlign: 'center' }}>AKSI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {books.length === 0 ? (
+                                            <tr><td colSpan="6" style={{ textAlign: 'center', padding: '25px', color: '#6b7280' }}>Belum ada data buku.</td></tr>
+                                        ) : (
+                                            books.map((b, index) => (
+                                                <tr key={b._id} style={{ borderBottom: '1px solid #e5e7eb', background: index % 2 === 0 ? '#ffffff' : '#f8fafc' }}>
+                                                    <td style={{ padding: '12px 15px', color: '#6b7280' }}>{index + 1}</td>
+                                                    <td style={{ padding: '12px 15px', fontWeight: '600', color: '#1f2937' }}>{b.title}</td>
+                                                    <td style={{ padding: '12px 15px', color: '#4b5563' }}>{b.author}</td>
+                                                    <td style={{ padding: '12px 15px', color: '#4b5563' }}>{b.publishedYear}</td>
+                                                    <td style={{ padding: '12px 15px', color: '#4b5563' }}>{b.genre}</td>
+                                                    <td style={{ padding: '12px 15px', textAlign: 'center' }}>
+                                                        <span onClick={() => handleEditBook(b)} style={{ color: '#2563eb', cursor: 'pointer', fontWeight: '600', marginRight: '8px' }}>Edit</span>
+                                                        <span style={{ color: '#cbd5e1' }}>|</span>
+                                                        <span onClick={() => handleDeleteBook(b._id)} style={{ color: '#dc2626', cursor: 'pointer', fontWeight: '600', marginLeft: '8px' }}>Hapus</span>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     )}
 
                     {/* TAB DATA ANGGOTA */}
                     {activeTab === 'members' && (
-                        <div style={{ background: 'white', padding: '25px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+                        <div className="table-card">
                             <h3 style={{ marginTop: 0, marginBottom: '20px', color: '#1f2937' }}>Data Anggota Perpustakaan</h3>
-                            <form onSubmit={handleSaveMember} style={{ background: '#f8fafc', padding: '20px', borderRadius: '8px', border: '1px solid #e2e8f0', display: 'grid', gridTemplateColumns: '2fr 2fr 2fr auto', gap: '15px', alignItems: 'end', marginBottom: '25px', boxSizing: 'border-box' }}>
+                            <form onSubmit={handleSaveMember} className="form-grid-dynamic">
                                 <div>
-                                    <label style={{ fontSize: '12px', color: '#4b5563', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Nama Lengkap</label>
-                                    <input type="text" placeholder="Nama..." value={memberName} onChange={(e) => setMemberName(e.target.value)} style={{ width: '100%', padding: '8px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', boxSizing: 'border-box', background: 'white', outline: 'none' }} />
+                                    <label className="form-label">Nama Lengkap</label>
+                                    <input type="text" placeholder="Nama..." value={memberName} onChange={(e) => setMemberName(e.target.value)} className="form-input" />
                                 </div>
                                 <div>
-                                    <label style={{ fontSize: '12px', color: '#4b5563', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Email</label>
-                                    <input type="email" placeholder="Email..." value={memberEmail} onChange={(e) => setMemberEmail(e.target.value)} style={{ width: '100%', padding: '8px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', boxSizing: 'border-box', background: 'white', outline: 'none' }} />
+                                    <label className="form-label">Email</label>
+                                    <input type="email" placeholder="Email..." value={memberEmail} onChange={(e) => setMemberEmail(e.target.value)} className="form-input" />
                                 </div>
                                 <div>
-                                    <label style={{ fontSize: '12px', color: '#4b5563', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>No. Telepon</label>
-                                    <input type="text" placeholder="Telepon..." value={memberPhone} onChange={(e) => setMemberPhone(e.target.value)} style={{ width: '100%', padding: '8px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', boxSizing: 'border-box', background: 'white', outline: 'none' }} />
+                                    <label className="form-label">No. Telepon</label>
+                                    <input type="text" placeholder="Telepon..." value={memberPhone} onChange={(e) => setMemberPhone(e.target.value)} className="form-input" />
                                 </div>
-                                <button type="submit" style={{ padding: '9px 20px', background: '#0b3c5d', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', height: '37px' }}>+ Tambah</button>
+                                <button type="submit" className="form-submit-btn">+ Tambah</button>
                             </form>
 
-                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', tableLayout: 'fixed' }}>
-                                <thead>
-                                    <tr style={{ background: '#0b3c5d', color: 'white', textAlign: 'left' }}>
-                                        <th style={{ padding: '14px 15px', width: '8%', verticalAlign: 'middle' }}>#</th>
-                                        <th style={{ padding: '14px 15px', width: '32%', verticalAlign: 'middle' }}>NAMA</th>
-                                        <th style={{ padding: '14px 15px', width: '32%', verticalAlign: 'middle' }}>EMAIL</th>
-                                        <th style={{ padding: '14px 15px', width: '18%', verticalAlign: 'middle' }}>TELEPON</th>
-                                        <th style={{ padding: '14px 15px', width: '10%', textAlign: 'center', verticalAlign: 'middle' }}>AKSI</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {members.length === 0 ? (
-                                        <tr><td colSpan="5" style={{ textAlign: 'center', padding: '25px', color: '#6b7280' }}>Belum ada data anggota.</td></tr>
-                                    ) : (
-                                        members.map((m, index) => (
-                                            <tr key={m._id} style={{ borderBottom: '1px solid #e5e7eb', background: index % 2 === 0 ? '#ffffff' : '#f8fafc' }}>
-                                                <td style={{ padding: '14px 15px', color: '#6b7280', verticalAlign: 'middle' }}>{index + 1}</td>
-                                                <td style={{ padding: '14px 15px', fontWeight: '600', color: '#1f2937', verticalAlign: 'middle' }}>{m.name}</td>
-                                                <td style={{ padding: '14px 15px', color: '#4b5563', verticalAlign: 'middle' }}>{m.email}</td>
-                                                <td style={{ padding: '14px 15px', color: '#4b5563', verticalAlign: 'middle' }}>{m.phone}</td>
-                                                <td style={{ padding: '14px 15px', textAlign: 'center', verticalAlign: 'middle' }}>
-                                                    <span onClick={() => handleDeleteMember(m._id)} style={{ color: '#dc2626', cursor: 'pointer', fontWeight: '600' }}>Hapus</span>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    )}
-                                </tbody>
-                            </table>
+                            <div className="table-responsive">
+                                <table className="custom-table">
+                                    <thead>
+                                        <tr style={{ background: '#0b3c5d', color: 'white', textAlign: 'left' }}>
+                                            <th style={{ padding: '12px 15px' }}>#</th>
+                                            <th style={{ padding: '12px 15px' }}>NAMA</th>
+                                            <th style={{ padding: '12px 15px' }}>EMAIL</th>
+                                            <th style={{ padding: '12px 15px' }}>TELEPON</th>
+                                            <th style={{ padding: '12px 15px', textAlign: 'center' }}>AKSI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {members.length === 0 ? (
+                                            <tr><td colSpan="5" style={{ textAlign: 'center', padding: '25px', color: '#6b7280' }}>Belum ada data anggota.</td></tr>
+                                        ) : (
+                                            members.map((m, index) => (
+                                                <tr key={m._id} style={{ borderBottom: '1px solid #e5e7eb', background: index % 2 === 0 ? '#ffffff' : '#f8fafc' }}>
+                                                    <td style={{ padding: '12px 15px', color: '#6b7280' }}>{index + 1}</td>
+                                                    <td style={{ padding: '12px 15px', fontWeight: '600', color: '#1f2937' }}>{m.name}</td>
+                                                    <td style={{ padding: '12px 15px', color: '#4b5563' }}>{m.email}</td>
+                                                    <td style={{ padding: '12px 15px', color: '#4b5563' }}>{m.phone}</td>
+                                                    <td style={{ padding: '12px 15px', textAlign: 'center' }}>
+                                                        <span onClick={() => handleDeleteMember(m._id)} style={{ color: '#dc2626', cursor: 'pointer', fontWeight: '600' }}>Hapus</span>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     )}
 
                     {/* TAB TRANSAKSI PEMINJAMAN */}
                     {activeTab === 'loans' && (
-                        <div style={{ background: 'white', padding: '25px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+                        <div className="table-card">
                             <h3 style={{ marginTop: 0, marginBottom: '20px', color: '#1f2937' }}>Data Transaksi Peminjaman</h3>
-                            <form onSubmit={handleSaveLoan} style={{ background: '#f8fafc', padding: '20px', borderRadius: '8px', border: '1px solid #e2e8f0', display: 'grid', gridTemplateColumns: '2fr 2fr 2fr auto', gap: '15px', alignItems: 'end', marginBottom: '25px', boxSizing: 'border-box' }}>
+                            <form onSubmit={handleSaveLoan} className="form-grid-dynamic">
                                 <div>
-                                    <label style={{ fontSize: '12px', color: '#4b5563', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Pilih Buku</label>
-                                    <select value={selectedBook} onChange={(e) => setSelectedBook(e.target.value)} style={{ width: '100%', padding: '8px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', background: 'white', outline: 'none' }}>
+                                    <label className="form-label">Pilih Buku</label>
+                                    <select value={selectedBook} onChange={(e) => setSelectedBook(e.target.value)} className="form-input">
                                         <option value="">-- Pilih Buku --</option>
                                         {books.map(b => <option key={b._id} value={b._id}>{b.title}</option>)}
                                     </select>
                                 </div>
                                 <div>
-                                    <label style={{ fontSize: '12px', color: '#4b5563', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Pilih Anggota</label>
-                                    <select value={selectedMember} onChange={(e) => setSelectedMember(e.target.value)} style={{ width: '100%', padding: '8px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', background: 'white', outline: 'none' }}>
+                                    <label className="form-label">Pilih Anggota</label>
+                                    <select value={selectedMember} onChange={(e) => setSelectedMember(e.target.value)} className="form-input">
                                         <option value="">-- Pilih Anggota --</option>
                                         {members.map(m => <option key={m._id} value={m._id}>{m.name}</option>)}
                                     </select>
                                 </div>
                                 <div>
-                                    <label style={{ fontSize: '12px', color: '#4b5563', fontWeight: 'bold', display: 'block', marginBottom: '5px' }}>Batas Pengembalian</label>
-                                    <input type="date" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} style={{ width: '100%', padding: '8px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', background: 'white', outline: 'none' }} />
+                                    <label className="form-label">Batas Pengembalian</label>
+                                    <input type="date" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} className="form-input" />
                                 </div>
-                                <button type="submit" style={{ padding: '9px 20px', background: '#0b3c5d', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', height: '37px' }}>+ Pinjam</button>
+                                <button type="submit" className="form-submit-btn">+ Pinjam</button>
                             </form>
 
-                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', tableLayout: 'fixed' }}>
-                                <thead>
-                                    <tr style={{ background: '#0b3c5d', color: 'white', textAlign: 'left' }}>
-                                        <th style={{ padding: '14px 15px', width: '6%', verticalAlign: 'middle' }}>#</th>
-                                        <th style={{ padding: '14px 15px', width: '28%', verticalAlign: 'middle' }}>JUDUL BUKU</th>
-                                        <th style={{ padding: '14px 15px', width: '22%', verticalAlign: 'middle' }}>PEMINJAM</th>
-                                        <th style={{ padding: '14px 15px', width: '16%', verticalAlign: 'middle' }}>BATAS KEMBALI</th>
-                                        <th style={{ padding: '14px 15px', width: '13%', verticalAlign: 'middle' }}>STATUS</th>
-                                        <th style={{ padding: '14px 15px', width: '15%', textAlign: 'center', verticalAlign: 'middle' }}>AKSI</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {loans.length === 0 ? (
-                                        <tr><td colSpan="6" style={{ textAlign: 'center', padding: '25px', color: '#6b7280' }}>Belum ada transaksi.</td></tr>
-                                    ) : (
-                                        loans.map((l, index) => (
-                                            <tr key={l._id} style={{ borderBottom: '1px solid #e5e7eb', background: index % 2 === 0 ? '#ffffff' : '#f8fafc' }}>
-                                                <td style={{ padding: '14px 15px', color: '#6b7280', verticalAlign: 'middle' }}>{index + 1}</td>
-                                                <td style={{ padding: '14px 15px', fontWeight: '600', color: '#1f2937', verticalAlign: 'middle' }}>{l.book ? l.book.title : 'Buku Dihapus'}</td>
-                                                <td style={{ padding: '14px 15px', color: '#4b5563', verticalAlign: 'middle' }}>{l.member ? l.member.name : 'Anggota Dihapus'}</td>
-                                                <td style={{ padding: '14px 15px', color: '#4b5563', verticalAlign: 'middle' }}>{new Date(l.returnDate).toLocaleDateString()}</td>
-                                                <td style={{ padding: '14px 15px', verticalAlign: 'middle' }}>
-                                                    <span style={{ padding: '4px 10px', borderRadius: '12px', fontSize: '11px', background: l.status === 'Dikembalikan' ? '#d1fae5' : '#fef3c7', color: l.status === 'Dikembalikan' ? '#065f46' : '#92400e', fontWeight: 'bold', display: 'inline-block' }}>
-                                                        {l.status}
-                                                    </span>
-                                                </td>
-                                                <td style={{ padding: '14px 15px', textAlign: 'center', verticalAlign: 'middle' }}>
-                                                    {l.status !== 'Dikembalikan' && (
-                                                        <span onClick={() => handleReturnLoan(l._id)} style={{ color: '#059669', cursor: 'pointer', fontWeight: '600', marginRight: '8px' }}>Kembalikan</span>
-                                                    )}
-                                                    <span onClick={() => handleDeleteLoan(l._id)} style={{ color: '#dc2626', cursor: 'pointer', fontWeight: '600' }}>Hapus</span>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    )}
-                                </tbody>
-                            </table>
+                            <div className="table-responsive">
+                                <table className="custom-table">
+                                    <thead>
+                                        <tr style={{ background: '#0b3c5d', color: 'white', textAlign: 'left' }}>
+                                            <th style={{ padding: '12px 15px' }}>#</th>
+                                            <th style={{ padding: '12px 15px' }}>JUDUL BUKU</th>
+                                            <th style={{ padding: '12px 15px' }}>PEMINJAM</th>
+                                            <th style={{ padding: '12px 15px' }}>BATAS KEMBALI</th>
+                                            <th style={{ padding: '12px 15px' }}>STATUS</th>
+                                            <th style={{ padding: '12px 15px', textAlign: 'center' }}>AKSI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {loans.length === 0 ? (
+                                            <tr><td colSpan="6" style={{ textAlign: 'center', padding: '25px', color: '#6b7280' }}>Belum ada transaksi.</td></tr>
+                                        ) : (
+                                            loans.map((l, index) => (
+                                                <tr key={l._id} style={{ borderBottom: '1px solid #e5e7eb', background: index % 2 === 0 ? '#ffffff' : '#f8fafc' }}>
+                                                    <td style={{ padding: '12px 15px', color: '#6b7280' }}>{index + 1}</td>
+                                                    <td style={{ padding: '12px 15px', fontWeight: '600', color: '#1f2937' }}>{l.book ? l.book.title : 'Buku Dihapus'}</td>
+                                                    <td style={{ padding: '12px 15px', color: '#4b5563' }}>{l.member ? l.member.name : 'Anggota Dihapus'}</td>
+                                                    <td style={{ padding: '12px 15px', color: '#4b5563' }}>{new Date(l.returnDate).toLocaleDateString()}</td>
+                                                    <td style={{ padding: '12px 15px' }}>
+                                                        <span style={{ padding: '4px 10px', borderRadius: '12px', fontSize: '11px', background: l.status === 'Dikembalikan' ? '#d1fae5' : '#fef3c7', color: l.status === 'Dikembalikan' ? '#065f46' : '#92400e', fontWeight: 'bold', display: 'inline-block' }}>
+                                                            {l.status}
+                                                        </span>
+                                                    </td>
+                                                    <td style={{ padding: '12px 15px', textAlign: 'center' }}>
+                                                        {l.status !== 'Dikembalikan' && (
+                                                            <span onClick={() => handleReturnLoan(l._id)} style={{ color: '#059669', cursor: 'pointer', fontWeight: '600', marginRight: '8px' }}>Kembalikan</span>
+                                                        )}
+                                                        <span onClick={() => handleDeleteLoan(l._id)} style={{ color: '#dc2626', cursor: 'pointer', fontWeight: '600' }}>Hapus</span>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     )}
                 </div>
             </div>
             
+            {/* CSS RESPONSIF & MEDIA QUERIES */}
             <style>{`
+                .app-container {
+                    display: flex;
+                    height: 100vh;
+                    background: #f4f6f9;
+                    font-family: Arial, sans-serif;
+                    overflow: hidden;
+                }
+                .sidebar {
+                    width: 260px;
+                    background: #0b3c5d;
+                    color: white;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 20px 0;
+                    box-sizing: border-box;
+                    flex-shrink: 0;
+                    z-index: 100;
+                    transition: transform 0.3s ease;
+                }
+                .sidebar-header {
+                    padding: 0 20px 20px 20px;
+                    border-bottom: 1px solid rgba(255,255,255,0.1);
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                }
+                .sidebar-logo {
+                    background: white;
+                    color: #0b3c5d;
+                    padding: 6px 10px;
+                    border-radius: 4px;
+                    font-weight: bold;
+                    font-size: 12px;
+                }
+                .sidebar-title {
+                    font-weight: bold;
+                    font-size: 16px;
+                    letter-spacing: 0.5px;
+                }
+                .sidebar-user {
+                    padding: 20px;
+                    text-align: center;
+                    border-bottom: 1px solid rgba(255,255,255,0.1);
+                }
+                .sidebar-avatar {
+                    width: 50px;
+                    height: 50px;
+                    background: #cbd5e1;
+                    border-radius: 50%;
+                    margin: 0 auto 10px auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 20px;
+                    color: #333;
+                }
+                .sidebar-menu {
+                    flex: 1;
+                    padding: 15px 10px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    overflow-y: auto;
+                }
+                .menu-btn {
+                    text-align: left;
+                    background: transparent;
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 14px;
+                }
+                .menu-btn.active {
+                    background: #1d4ed8;
+                }
+                .main-content-wrapper {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+                    width: 100%;
+                }
+                .top-navbar {
+                    height: 60px;
+                    background: white;
+                    border-bottom: 1px solid #e5e7eb;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0 20px;
+                    box-sizing: border-box;
+                }
+                .hamburger-btn {
+                    display: none;
+                    background: none;
+                    border: none;
+                    font-size: 22px;
+                    cursor: pointer;
+                    color: #0b3c5d;
+                }
+                .content-scrollable {
+                    flex: 1;
+                    overflow-y: auto;
+                    padding: 20px;
+                    box-sizing: border-box;
+                }
+                .overview-header-card {
+                    background: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    margin-bottom: 20px;
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                }
+                .stats-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 15px;
+                    margin-bottom: 25px;
+                }
+                .stat-card {
+                    background: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                }
+                .charts-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                }
+                .chart-container-box {
+                    background: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                }
+                .table-card {
+                    background: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                }
+                .form-grid-dynamic {
+                    background: #f8fafc;
+                    padding: 20px;
+                    border-radius: 8px;
+                    border: 1px solid #e2e8f0;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) auto;
+                    gap: 15px;
+                    align-items: end;
+                    margin-bottom: 25px;
+                    box-sizing: border-box;
+                }
+                .form-label {
+                    font-size: 12px;
+                    color: #4b5563;
+                    font-weight: bold;
+                    display: block;
+                    margin-bottom: 5px;
+                }
+                .form-input {
+                    width: 100%;
+                    padding: 8px 12px;
+                    border: 1px solid #cbd5e1;
+                    border-radius: 6px;
+                    box-sizing: border-box;
+                    background: white;
+                    outline: none;
+                }
+                .form-submit-btn {
+                    padding: 9px 20px;
+                    background: #0b3c5d;
+                    color: white;
+                    border: none;
+                    borderRadius: 6px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    height: 37px;
+                }
+                .table-responsive {
+                    width: 100%;
+                    overflow-x: auto;
+                }
+                .custom-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-size: 13px;
+                    white-space: nowrap;
+                }
+                .sidebar-overlay {
+                    display: none;
+                }
+
+                /* RESPONSIF UNTUK PONSEL & TABLET (Max 768px) */
+                @media (max-width: 768px) {
+                    .sidebar {
+                        position: fixed;
+                        top: 0;
+                        left: -260px;
+                        height: 100%;
+                        transition: left 0.3s ease-in-out;
+                    }
+                    .sidebar.open {
+                        left: 0;
+                    }
+                    .hamburger-btn {
+                        display: block;
+                    }
+                    .sidebar-overlay {
+                        display: block;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100vw;
+                        height: 100vh;
+                        background: rgba(0,0,0,0.4);
+                        z-index: 99;
+                    }
+                    .stats-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                    .charts-grid {
+                        grid-template-columns: 1fr;
+                    }
+                    .form-grid-dynamic {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
                 @media print {
                     .no-print {
                         display: none !important;
