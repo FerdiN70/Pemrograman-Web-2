@@ -7,7 +7,8 @@ const bookRoutes = require('./routes/bookRoutes');
 const authRoutes = require('./routes/authRoutes');
 const loanRoutes = require('./routes/loanRoutes');
 const memberRoutes = require('./routes/memberRoutes');
-// ... di bagian bawah bersama rute lain:
+const dashboardRoutes = require('./routes/dashboardRoutes');//update 2
+
 
 // Inisialisasi aplikasi Express
 const app = express();
@@ -31,6 +32,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/loans', loanRoutes);
 app.use('/api/members', memberRoutes);
+app.use('/api/dashboard', dashboardRoutes);// update 2
 // Endpoint Dasar untuk Testing
 app.get('/', (req, res) => {
     res.json({ message: "API Secure UNSIA Digital Library Dashboard Berjalan!" });
