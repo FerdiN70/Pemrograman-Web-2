@@ -54,7 +54,7 @@ export default function Login() {
                     
                     {/* TAMPILAN LOGO */}
                     <img 
-                        src={unsiaLogo} 
+                        src={logoImage} 
                         alt="Logo Kampus" 
                         style={{ width: '85px', height: '85px', objectFit: 'contain', marginBottom: '15px' }} 
                     />
