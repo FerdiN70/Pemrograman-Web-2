@@ -53,8 +53,8 @@ export default function Login() {
                     
                     {/* TAMPILAN LOGO */}
                     <img 
-                        src={unsia1Image} 
-                        alt="unsia1" 
+                        src={logoImage} 
+                        alt="Logo Kampus" 
                         style={{ width: '85px', height: '85px', objectFit: 'contain', marginBottom: '15px' }} 
                     />
 
@@ -145,7 +145,7 @@ export default function Login() {
                     padding: '40px',
                     textAlign: 'center'
                 }}>
-                  
+                  {/* BAGIAN YANG DIUBAH */}
     <img 
         src={logoImage} 
         alt="UNSIA Logo" 
