@@ -53,7 +53,7 @@ export default function Login() {
                     
                     {/* TAMPILAN LOGO */}
                     <img 
-                        src={logoImage} 
+                        src={unsia1Image} 
                         alt="unsia1" 
                         style={{ width: '85px', height: '85px', objectFit: 'contain', marginBottom: '15px' }} 
                     />
