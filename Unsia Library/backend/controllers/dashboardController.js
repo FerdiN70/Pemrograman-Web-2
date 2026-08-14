@@ -1,4 +1,4 @@
-const Book = require('../models/book');
+const Book = require('../models/book'); //update
 const Member = require('../models/Member');
 const Loan = require('../models/Loan');
 
