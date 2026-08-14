@@ -13,12 +13,10 @@ const memberRoutes = require('./routes/memberRoutes');
 const app = express();
 
 // Koneksi ke Database
-connectDB(); // <-- 2. Tambahkan baris ini untuk mengeksekusi koneksi
+connectDB(); // Koneksi ke Database
 
 // Middleware Keamanan dan Parsing JSON (Sesuai Syarat Poin 11)
 app.use(helmet());
-const cors = require('cors');
-
 app.use(cors({
     origin: '*', // Mengizinkan semua domain untuk mengakses backend
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
