@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import API from '../services/api';
 import { useNavigate } from 'react-router-dom';
-import logoImage from '../assets/logo.png'; // Mengimpor gambar logo
+import logoImage from '../assets/logo.png'; 
+import unsiaLogo from '../assets/logo-unsia.png';
 
 export default function Login() {
     const [isLogin, setIsLogin] = useState(true);
@@ -53,7 +54,7 @@ export default function Login() {
                     
                     {/* TAMPILAN LOGO */}
                     <img 
-                        src={logoImage} 
+                        src={unsiaLogo} 
                         alt="Logo Kampus" 
                         style={{ width: '85px', height: '85px', objectFit: 'contain', marginBottom: '15px' }} 
                     />
