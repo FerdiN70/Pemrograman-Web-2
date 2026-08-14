@@ -1,5 +1,5 @@
-const Book = require('../models/book'); //update
-const Member = require('../models/Member');
+const Book = require('../models/book'); //update 
+const Member = require('../models/Member'); //update
 const Loan = require('../models/Loan');
 
 // GET /api/dashboard/summary (Sesuai Soal)
