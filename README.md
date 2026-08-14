@@ -35,10 +35,12 @@ Jika Anda ingin menjalankan aplikasi ini di komputer lokal, ikuti langkah beriku
    
 2. **Install dependensi (Backend & Frontend):**
 Masuk ke folder backend dan frontend, lalu jalankan:
-npm install
-3. **Konfigurasi Environment:**
+   ```bash
+   npm install
+4. **Konfigurasi Environment:**
 Pastikan file .env sudah diatur sesuai dengan koneksi database MongoDB Anda.
-npm run dev
+   ```bash
+   npm run dev
 
 
 
