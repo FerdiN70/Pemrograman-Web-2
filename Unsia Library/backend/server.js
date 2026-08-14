@@ -18,9 +18,10 @@ connectDB(); // Koneksi ke Database
 // Middleware Keamanan dan Parsing JSON (Sesuai Syarat Poin 11)
 app.use(helmet());
 app.use(cors({
-    origin: '*', // Mengizinkan semua domain untuk mengakses backend
+    origin: 'https://pemrograman-web-2-git-main-ferdin70s-projects.vercel.app', // Ganti atau tambahkan domain lain jika perlu
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true // Diperlukan jika menggunakan Cookie / Authorization Header dengan kredensial
 }));
 app.use(express.json());
 
