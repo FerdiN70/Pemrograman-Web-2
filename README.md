@@ -44,7 +44,7 @@ Jika Anda ingin menjalankan aplikasi ini di komputer lokal, ikuti langkah beriku
 
 1. **Clone repositori ini:**
    ```bash
-   git clone [URL_REPOSITORI_ANDA]
+   git clone https://github.com/FerdiN70/Pemrograman-Web-2.git
    
 2. **Install dependensi (Backend & Frontend):**
 Masuk ke folder backend dan frontend, lalu jalankan:
