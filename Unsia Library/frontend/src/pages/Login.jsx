@@ -54,7 +54,7 @@ export default function Login() {
                     {/* TAMPILAN LOGO */}
                     <img 
                         src={logoImage} 
-                        alt="Logo Kampus" 
+                        alt="unsia1" 
                         style={{ width: '85px', height: '85px', objectFit: 'contain', marginBottom: '15px' }} 
                     />
 
@@ -145,19 +145,20 @@ export default function Login() {
                     padding: '40px',
                     textAlign: 'center'
                 }}>
-                    <div style={{
-                        width: '80px',
-                        height: '80px',
-                        background: 'rgba(255, 255, 255, 0.12)',
-                        borderRadius: '50%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginBottom: '20px',
-                        fontSize: '36px'
-                    }}>
-                        📖
-                    </div>
+                  
+    <img 
+        src={logoImage} 
+        alt="UNSIA Logo" 
+        style={{
+            width: '100px', 
+            height: '100px',
+            marginBottom: '20px',
+            objectFit: 'contain',
+            background: 'rgba(255, 255, 255, 0.12)', // Mempertahankan latar belakang lingkaran agar mirip
+            borderRadius: '50%',
+            padding: '10px'
+        }} 
+    />  
                     <h3 style={{ fontSize: '22px', marginBottom: '12px', fontWeight: 'bold' }}>UNSIA Digital Library</h3>
                     <p style={{ fontSize: '14px', color: '#d0d9e4', lineHeight: '1.6' }}>
                         Sistem manajemen perpustakaan modern untuk memudahkan akses literatur dan pencatatan peminjaman buku.
