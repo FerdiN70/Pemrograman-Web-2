@@ -147,7 +147,7 @@ export default function Login() {
                 }}>
                   {/* BAGIAN YANG DIUBAH */}
     <img 
-        src={logoImage} 
+        src={unsia1Image} 
         alt="UNSIA Logo" 
         style={{
             width: '100px', 
