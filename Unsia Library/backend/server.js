@@ -17,7 +17,13 @@ connectDB(); // <-- 2. Tambahkan baris ini untuk mengeksekusi koneksi
 
 // Middleware Keamanan dan Parsing JSON (Sesuai Syarat Poin 11)
 app.use(helmet());
-app.use(cors());
+const cors = require('cors');
+
+app.use(cors({
+    origin: '*', // Mengizinkan semua domain untuk mengakses backend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
