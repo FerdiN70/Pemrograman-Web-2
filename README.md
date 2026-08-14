@@ -15,7 +15,7 @@ UNSIA Digital Library adalah sebuah aplikasi sistem manajemen perpustakaan yang 
 ## Tampilan Aplikasi
 
 ### Halaman Login
-<img width="1122" height="598" alt="image" src="https://github.com/user-attachments/assets/1cd687b8-bfac-451c-b08a-0c8c6cf0b142" />
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/1cd687b8-bfac-451c-b08a-0c8c6cf0b142" />
 
 
 ### Dashboard Overview
