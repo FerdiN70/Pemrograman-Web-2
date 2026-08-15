@@ -41,7 +41,8 @@ Anda dapat mengakses versi *live* dari aplikasi ini melalui tautan berikut:
 
 **Akses:**
 User   :Ferdi
-Paswod:Ferdi1234
+
+Pasword:Ferdi1234
   
 
 ## Cara Menjalankan Lokal (Untuk Pengembangan)
