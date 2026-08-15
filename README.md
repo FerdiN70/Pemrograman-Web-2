@@ -40,10 +40,8 @@ Anda dapat mengakses versi *live* dari aplikasi ini melalui tautan berikut:
 👉 [Klik di sini untuk mengunjungi UNSIA Digital Library](https://pemrograman-web-2-gamma.vercel.app/)
 
 **Akses:**
-   User:Ferdi
-   Paswod:Ferdi1234
-
-**Clone repositori ini**
+User   :Ferdi
+Paswod:Ferdi1234
   
 
 ## Cara Menjalankan Lokal (Untuk Pengembangan)
