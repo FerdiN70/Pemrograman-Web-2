@@ -44,7 +44,8 @@ Anda dapat mengakses versi *live* dari aplikasi ini melalui tautan berikut:
 ```bash
    User:Ferdi
    Paswod:Ferdi1234
-1. **Clone repositori ini:**
+
+**Clone repositori ini**
   
 
 ## Cara Menjalankan Lokal (Untuk Pengembangan)
