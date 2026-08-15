@@ -41,7 +41,7 @@ Anda dapat mengakses versi *live* dari aplikasi ini melalui tautan berikut:
 
 **Akses:**
 
-   ```bash
+```bash
    User:Ferdi
    Paswod:Ferdi1234
 
