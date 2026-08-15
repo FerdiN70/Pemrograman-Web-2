@@ -39,12 +39,10 @@ Anda dapat mengakses versi *live* dari aplikasi ini melalui tautan berikut:
 
 👉 [Klik di sini untuk mengunjungi UNSIA Digital Library](https://pemrograman-web-2-gamma.vercel.app/)
 **Akses:**
+
    ```bash
    User:Ferdi
    Paswod:Ferdi1234
-
-atau anda dapat melakukan pendaftaran mandiri.
-
 
 ## Cara Menjalankan Lokal (Untuk Pengembangan)
 Jika Anda ingin menjalankan aplikasi ini di komputer lokal, ikuti langkah berikut:
